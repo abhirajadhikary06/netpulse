@@ -6,7 +6,7 @@ from datetime import datetime
 import pytz
 
 load_dotenv()
-
+# Connection to DB
 def get_db_connection():
     try:
         conn = psycopg2.connect(os.getenv('DATABASE_URL'))
@@ -14,7 +14,7 @@ def get_db_connection():
     except Exception as e:
         print(f"Database connection error: {e}")
         raise
-
+# Initialization of DB
 def init_db():
     conn = get_db_connection()
     cur = conn.cursor()
@@ -33,6 +33,7 @@ def init_db():
     cur.close()
     conn.close()
 
+# Fetching of data from DB
 def fetch_recent_checks(limit=10):
     conn = get_db_connection()
     cur = conn.cursor(cursor_factory=RealDictCursor)
